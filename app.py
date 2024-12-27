@@ -9,16 +9,16 @@ users = [
 ]
 
 # Create a user
-@app.route('/user', methods=['POST'])
-def create_user():
-    data = request.get_json()
+@app.route('/user/<name>/<int:age>', methods=['POST'])
+def create_user(name, age):
     new_user = {
         "id": len(users) + 1,
-        "name": data['name'],
-        "age": data['age']
+        "name": name,
+        "age": age
     }
     users.append(new_user)
     return f"User added with ID {new_user['id']}", 201
+
 
 # Read users
 @app.route('/user', methods=['GET'])
