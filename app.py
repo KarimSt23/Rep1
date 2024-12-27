@@ -26,16 +26,16 @@ def get_users():
     return '\n'.join([f"ID: {user['id']}, Name: {user['name']}, Age: {user['age']}" for user in users])
 
 # Update a user
-@app.route('/user/<int:user_id>', methods=['PUT'])
-def update_user(user_id):
-    data = request.get_json()
+@app.route('/user/<int:user_id>/<name>/<int:age>', methods=['PUT'])
+def update_user(user_id, name, age):
     user = next((user for user in users if user["id"] == user_id), None)
     if user:
-        user["name"] = data["name"]
-        user["age"] = data["age"]
+        user["name"] = name
+        user["age"] = age
         return "User updated"
     else:
         return "User not found", 404
+
 
 # Delete a user
 @app.route('/user/<int:user_id>', methods=['DELETE'])
