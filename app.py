@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -18,12 +18,12 @@ def create_user():
         "age": data['age']
     }
     users.append(new_user)
-    return jsonify({"message": "User added", "user_id": new_user["id"]}), 201
+    return f"User added with ID {new_user['id']}", 201
 
 # Read users
 @app.route('/user', methods=['GET'])
 def get_users():
-    return jsonify(users)
+    return '\n'.join([f"ID: {user['id']}, Name: {user['name']}, Age: {user['age']}" for user in users])
 
 # Update a user
 @app.route('/user/<int:user_id>', methods=['PUT'])
@@ -33,16 +33,16 @@ def update_user(user_id):
     if user:
         user["name"] = data["name"]
         user["age"] = data["age"]
-        return jsonify({"message": "User updated"})
+        return "User updated"
     else:
-        return jsonify({"message": "User not found"}), 404
+        return "User not found", 404
 
 # Delete a user
 @app.route('/user/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     global users
     users = [user for user in users if user["id"] != user_id]
-    return jsonify({"message": "User deleted"})
+    return "User deleted"
 
 if __name__ == '__main__':
     app.run(debug=True)
