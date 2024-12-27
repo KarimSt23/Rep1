@@ -34,7 +34,7 @@ def update_user(user_id, name, age):
         user["age"] = age
         return "User updated"
     else:
-        return "User not found", 404
+        return "User not", 404
 
 
 # Delete a user
