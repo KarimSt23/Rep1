@@ -8,7 +8,7 @@ def home():
 
 @app.route("/about")
 def about():
-    return "This is a simple Flask application with two routes. Hi Hi"
+    return "This is a simple Flask application with two routes. HO HO"
 
 if __name__ == "__main__":
     app.run(debug=True)
